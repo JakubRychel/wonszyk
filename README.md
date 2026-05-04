@@ -1,4 +1,4 @@
-# Wonszyk (Snake Game)
+# 🐍 Wonszyk (Snake Game)
 
 Prosta gra w węża napisana w Pythonie. Klasyczna zabawa, gdzie sterujesz wężem, jedząc jedzenie i unikając ścian oraz własnego ogona.
 
