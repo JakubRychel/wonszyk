@@ -22,9 +22,9 @@ class Segment:
 class Snake:
     def __init__(self):
         self.body = [
-            Segment(15, 10)
+            Segment(0, 0)
         ]
-        self.direction = (0, -1)
+        self.direction = (1, 0)
         self.next_direction = self.direction
 
     def draw(self, screen):
