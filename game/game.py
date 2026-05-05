@@ -10,10 +10,12 @@ class Game:
 
         pygame.display.set_caption("Wonsz żeczny")
 
-        self.font = pygame.font.SysFont('consolas', 24)
+        self.font = pygame.font.SysFont('consolas', TILE)
 
-        self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
+        self.screen = pygame.display.set_mode((WIDTH, HEIGHT + HUD_HEIGHT))
         self.clock = pygame.time.Clock()
+
+        self.game_surface = pygame.Surface((WIDTH, HEIGHT))
 
         self.last_tick = pygame.time.get_ticks()
         self.tick_time = TICK_TIME
@@ -97,11 +99,12 @@ class Game:
         self.last_tick = pygame.time.get_ticks()
 
     def draw(self):
-        self.screen.fill(COLOR_BG)
+        self.screen.fill(COLOR_EL)
+        self.game_surface.fill(COLOR_BG)
 
         if self.state == 0:
-            self.snake.draw(self.screen)
-            self.food.draw(self.screen)
+            self.snake.draw(self.game_surface)
+            self.food.draw(self.game_surface)
 
         else:
             text = self.font.render(
@@ -116,16 +119,18 @@ class Game:
                 COLOR_EL
             )
 
-            self.screen.blit(title, (WIDTH//2 - title.get_width()//2, HEIGHT//2 - 40))
-            self.screen.blit(text, (WIDTH//2 - text.get_width()//2, HEIGHT//2))
+            self.game_surface.blit(title, (WIDTH//2 - title.get_width()//2, HEIGHT//2 - 40))
+            self.game_surface.blit(text, (WIDTH//2 - text.get_width()//2, HEIGHT//2))
+
+        self.screen.blit(self.game_surface, (0, HUD_HEIGHT))
 
         length_text = self.font.render(
             f'Długość wonsza: {len(self.snake.body)}',
             True,
-            COLOR_EL
+            COLOR_BG
         )
 
-        self.screen.blit(length_text, (10, 10))
+        self.screen.blit(length_text, (TILE * 0.25, TILE * 0.25))
 
         pygame.display.flip()
 
