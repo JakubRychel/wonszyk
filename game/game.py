@@ -11,6 +11,7 @@ class Game:
         pygame.display.set_caption("Wonsz żeczny")
 
         self.font = pygame.font.SysFont('consolas', TILE)
+        self.small_font = pygame.font.SysFont('consolas', TILE // 2)
 
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT + HUD_HEIGHT))
         self.clock = pygame.time.Clock()
@@ -107,13 +108,13 @@ class Game:
             self.food.draw(self.game_surface)
 
         else:
-            text = self.font.render(
+            text = self.small_font.render(
                 'Naciśnij "R" aby zagrać ponownie',
                 True,
                 COLOR_EL
             )
 
-            title = self.font.render(
+            title = self.small_font.render(
                 'wygrana' if self.state > 0 else 'przegrana',
                 True,
                 COLOR_EL

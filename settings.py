@@ -1,4 +1,4 @@
-TILE = 28
+TILE = 40
 GRID_W = 14
 GRID_H = 8
 

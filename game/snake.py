@@ -16,7 +16,7 @@ class Segment:
             pygame.draw.rect(
                 screen,
                 COLOR_EL,
-                (x + i % 3 * (cell_size + 1), y + i // 3 * (cell_size + 1), cell_size, cell_size)
+                (x + i % 3 * (cell_size + 1) + 1, y + i // 3 * (cell_size + 1) + 1, cell_size, cell_size)
             )
 
 class Snake:
