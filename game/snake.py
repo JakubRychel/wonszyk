@@ -24,33 +24,42 @@ class Snake:
         self.body = [
             Segment(0, 0)
         ]
-        self.direction = (1, 0)
-        self.next_direction = self.direction
+        self.current_direction = (1, 0)
+        self.selected_direction = self.current_direction
+        self.next_selected_direction = None
 
     def draw(self, screen):
         for tile in self.body:
             tile.draw(screen)
 
     def move(self):
-        self.direction = self.next_direction
+        self.current_direction = self.selected_direction
+
+        if self.next_selected_direction:
+            self.selected_direction = self.next_selected_direction
+            self.next_selected_direction = None
 
         head = self.body[0]
 
         new_head = Segment(
-            head.x + self.direction[0],
-            head.y + self.direction[1]
+            head.x + self.current_direction[0],
+            head.y + self.current_direction[1]
         )
 
         self.body.insert(0, new_head)
 
     def pop(self):
-            self.body.pop()
+        self.body.pop()
 
     def set_direction(self, new_direction):
-        if new_direction == (-self.direction[0], -self.direction[1]):
+        if new_direction == (-self.current_direction[0], -self.current_direction[1]) \
+            or new_direction == self.current_direction:
+            if self.current_direction != self.selected_direction:
+                self.next_selected_direction = new_direction
+
             return
 
-        self.next_direction = new_direction
+        self.selected_direction = new_direction
 
     def check_wall_collision(self):
         head = self.body[0]
