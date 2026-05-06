@@ -86,7 +86,10 @@ class Game:
         head = self.snake.body[0]
 
         if head.x == self.food.x and head.y == self.food.y:
-            self.food.x, self.food.y = self.get_free_position()
+            free_position = self.get_free_position()
+
+            if free_position:
+                self.food.x, self.food.y = free_position
 
             return
         
@@ -141,4 +144,7 @@ class Game:
 
         free_positions = [position for position in all_positions if position not in snake_positions]
 
+        if not free_positions:
+            return None
+        
         return random.choice(free_positions)
